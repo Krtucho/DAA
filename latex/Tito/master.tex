@@ -1,0 +1,145 @@
+\documentclass[a4paper, 12pt]{article}
+\topmargin = -1 cm
+\textheight = 650 pt
+%\textwidth = 16 cm
+%\oddsidemargin = -0.1 cm
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{shortvrb}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{listings} 
+
+\begin{document}
+\begin{center}
+\Huge Propuesta de tema para el proyecto de Simulaci\'on
+\end{center}
+
+\begin{itemize}
+\item Carlos Carret C-312
+\end{itemize}
+
+Enunciado del problema\\
+
+Tito el tramposo
+
+Tito está pasando un curso de Diseño y Análisis de Algoritmos. Este año,
+por primera vez en la historia, los profesores han decidido evaluar el
+curso mediante un examen final y Tito se ha dado cuenta de que, a
+grandes rasgos, está frito. A pesar de ser un poco barco, es de hecho un
+muchacho inteligente y rápidamente se da cuenta que su única forma de
+aprobar era hacer trampa. El día de la prueba, Tito se sentó en el
+asiento que estaba entre Hansel y Elena para fijarse, con la esperanza
+de que, uniendo las preguntas respondidas por cada uno, se pudiera
+formar un examen correcto.
+
+El examen tiene $n$ preguntas, ordenadas en la hoja. Elena y Hansel
+pueden no ser capaces de responder cada uno el examen entero, pero todas
+las preguntas que responden, están correctas. Se conoce cuáles preguntas
+respondió cada uno y se reciben como dos listas ordenadas de enteros
+entre 1 y $n$. Tito tiene $p$ oportunidades para mirar hacia la
+izquierda (hoja de Hansel) o hacia la derecha (Hoja de Elena) y su
+agilidad mental le alcanza para ver las respuestas de $k$ preguntas
+consecutivas (en cualquier posición) cada vez que echa una mirada a un
+examen.
+
+Ayude a Tito a saber la cantidad máxima de preguntas que puede responder
+con su (tramposa) estrategia.
+
+% Escribir enunciado de apartado
+\section{Descripcion del problema}
+\begin{verbatim}
+    Enunciado
+\end{verbatim}
+
+El problema que se presenta es el de ayudar a Tito a encontrar la cantidad máxima de preguntas que puede responder correctamente en un examen, mediante la observación de las respuestas de Hansel y Elena. Se asume que Tito tiene la capacidad de ver $k$ preguntas consecutivas en cada oportunidad que tiene para mirar hacia la izquierda o hacia la derecha.
+
+Se cuenta con dos listas ordenadas de enteros entre 1 y $n$, que indican las preguntas que fueron respondidas correctamente por Hansel y Elena, respectivamente. El objetivo de Tito es unir ambas listas de manera tal que se forme un examen correcto. 
+
+Es importante destacar que Hansel y Elena pueden no haber respondido todas las preguntas del examen, pero las que respondieron son correctas. 
+
+Se debe encontrar una estrategia tramposa que permita a Tito observar las respuestas de Hansel y Elena de tal forma que pueda responder la mayor cantidad posible de preguntas correctamente.
+Aspectos a destacar del problema:
+\begin{itemize}
+\item Se trata de un problema de optimización, en el que se busca encontrar la cantidad máxima de preguntas que Tito puede responder correctamente.
+
+\item El problema implica el uso de listas ordenadas de enteros, lo que sugiere que debemos utilizar algoritmos que nos faciliten el trabajo con estas estructuras de datos para resolverlo, asi como un buen manejo de los datos contenidos en las mismas.
+
+\item La capacidad de Tito para ver $k$ preguntas consecutivas en cada oportunidad que tiene para mirar hacia la izquierda o hacia la derecha es un aspecto clave del problema, ya que limita la cantidad de información que puede obtener en cada oportunidad.
+
+\item El hecho de que Hansel y Elena no hayan respondido todas las preguntas del examen, pero las que respondieron son correctas, implica que algunas preguntas pueden estar ausentes de las listas y se deben manejar estos casos en la estrategia tramposa.
+
+\item Al parecer se puede seguir una estrategia greedy para resolver el problema, ya que siempre nos queremos quedar con el valor optimo. Tambien parece que se puede lograr seguir una estrategia de divide y venceras, ya que se puede dividir el problema en subproblemas mas pequeños, los cuales pueden ser resueltos de manera independiente.
+
+\item Dado que podemos dividir nuestro problema en subproblemas mas pequeños, podemos utilizar la programación dinámica para resolverlo, ya que esta técnica nos permite resolver problemas de optimización que pueden ser divididos en subproblemas mas pequeños.
+
+\item El ordenamiento de las preguntas es importante, ya que se debe preservar el orden original de las preguntas en el examen.
+\end{itemize}
+
+% Ideas para atacar al problema
+\begin{itemize}
+    \item Primeramente se busca dar solucion al problema mediante la recursividad y fuerza bruta. Con esto buscamos resolver el problema para obtener resultados lo suficientemente correctos para luego compararlos con otras soluciones que sean mejores.
+    \item Luego se realizaron modificaciones al algoritmo de fuerza bruta para obtener una solucion mas eficiente. Se agrega un diccionario para guardar todas aquellas selecciones de p miradas y no repetirlas, de esta forma se poda la busqueda de soluciones repetidas o que no tendrian mucho sentido. Se realizaron pruebas con los datos de entrada para ver si el algoritmo obtenia resultados correctos.
+    \item Siguiendo el camino de la recursividad y las mejoras a nuestro algoritmo, se puede notar que cada vez que vamos a escoger hacia que lado mirar, digamos consumir una instancia de p = 1, estamos escogiendo si mirar hacia la izquierda, derecha o si no mirar hacia ningun lado y mirar para el siguiente p. Es decir, nos encontramos con que podemos escoger entre 3 elecciones y nuestro problema quedaria subdividido en 3 subproblemas, 
+    por tanto, podemos hacer uso de la tecnica de divide y venceras para luego quedarnos con la solucion que nos aporte un mayor numero de preguntas respondidas.
+    \item Observando un poco la manera de escoger hacia que lado mirar y la manera en que se resuelve el problema, se puede notar que la estrategia golosa es una buena opcion para resolver el problema. Esto se debe a que siempre nos queremos quedar con el valor optimo, por tanto, podemos escoger la mejor opcion en cada momento y asi obtener la solucion optima.
+    \item Siguiendo una idea parecida a la de divide y venceras podemos darnos cuenta que al dividir nuestro problema en subproblemas podemos utilizar programacion dinamica para obtener una solucion mas rapida y que consuma menos memoria.
+\end{itemize}
+
+% Herramientas y codigo auxiliar
+Para la realizacion de este proyecto se utilizo Python en su version 3.7.4.
+Se crearon las clases SOL y MatchedSOL que se encuentran en el archivo sol.py, asi como otros metodos auxiliares utiles para el manejo de las estructuras de datos y las soluciones que se van conformando.
+Las clases SOL y MatchedSOL son utilizadas para representar soluciones, digase solucion la secuenta de selecciones que se hacen a medida que se escoge si mirar hacia el examen de elena a k preguntas o al de hansel a k preguntas.
+Entonces estas clases tendrian un string que seria el nombre de la persona a la cual se observa el examen, un intervalo representado por una instancia del tipo range() que nos brindara informacion sobre que intervalos se escoge, es decir, se busca a partir de la pregunta i hasta la i+k, siendo i<=n-k.
+Para el caso de la clase MatchedSOL tambien tendremos una lista de tipo bool de tamanno n que nos dira cuales preguntas tenia respondida esta persona en el intervalo desde i hasta i+k, asi como una variable para almacenar la cantidad de estas preguntas respondidas.
+
+En lo adelante nos referiremos a una solucion como una concatenacion de selecciones(SOL)
+
+% Algoritmo de solución
+
+% Fuerza Bruta Backtracking - bf
+% Idea Intuitiva
+La idea intuitiva que se sigue en este algoritmo es la siguiente:
+Se generan todas las combinaciones que puede escoger Tito mirando hacia ambos lados. Recalcar que en el primer algoritmo recursivo de backtrack que se crea se pueden tener selecciones repetidas. Por ejemplo, se puede mirar a la hoja de Hansel a las preguntas 1+k y luego volver a mirar a la hoja de Hansel a las preguntas 1+k, repitiendo asi
+una seleccion y consumiendo 2 oportunidades, quedandonos solamente p-2 oportunidades para encontrar mas respuestas.
+El algoritmo consta de dos ciclos for que llaman en su interior al metodo recursivo, que es en si mismo quien contiene el doble ciclo for. En el primer ciclo se itera por las personas disponibles para que Tito se fije, es decir Elena y Hansel (llamemosles dominios). En el segundo for se itera por los distintos intervalos que se pueden escoger de i+k preguntas.
+Iterando desde i=0 hasta i=n+k-1, de esta manera no estamos teniendo en cuenta las soluciones de las ultimas n-k veces, ya que serian redundantes y estariamos repitiendo selecciones que ya tuvimos en cuenta, debido a que al escoger i=n-k+1 solo podemos obtener un menor valor de cantidad maxima de respuestas correctas al escoger n-k+2, n-k+3,...n-k+n.
+Luego de esta forma estariamos escogiendo todas las posibles formas de seleccionar hacia donde mirar p veces.
+
+Como caso de parada de nuestro algoritmo tenemos que cuando p sea 0 se detenga. En cada llamado recursivo vamos decrementando p y de esta forma sabemos que en el siguiente llamado recursivo tenemos que llamar recursivamente de nuevo p-1 veces que seran las restantes veces que Tito podria mirar hacia la hoja de Elena o la de Hansel.
+
+% Demostracion de que esto funciona
+Practicamente con nuestro algoritmo estamos probando todas las maneras posibles mediante las cuales se puede escoger hacia donde mirar p veces, solamente obviando aquellas selecciones donde se repiten respuestas que ya obtuvimos y que por tanto ya estan contenidas en otra, es decir las ultimas n-k.
+Luego con demostrar que nuestro algoritmo las genera todas y que esas ultimas ya estan contenidas en otras nos basta para afirmar que nuestro algoritmo nos devuelve valores correctos.
+Para demostrar que nuestro algoritmo genera todas las posibles selecciones nos apoyaremos en un poco de combinatoria.
+
+Si para cada posicion(i donde i es la pregunta i) podemos escoger que la pregunta i sera escogida de elena o hansel y las siguientes n-i preguntas pueden ser escogidas de ambos igual, podemos notar que en el momento en el que se escoge la pregunta i nos quedan n-i * (cantidad de formas eswcogiendo primero elena + cantidad de formas escogiendo primero hansel) .
+Diremos que el primer for se encarga de escoger primero a elena y luego a hansel, para asi calcular la cantidad de veces en la que primero escoge elena y en la que primero escoge hansel las restantes n-i preguntas. Mientras que el segundo ciclo for se encarga de brindarnos la posibilidad de movernos entre esas n-i preguntas, repitiendo las anteriores que sean menores que i en algunos casos, pero nos da igual porque al estar repetidas no influiran en el conteo a la hora de buscar el maximo.
+Solo nos volvera mas ineficiente nuestro algoritmo, pero podemos continuar con la idea principal de que hasta el momento i se escogieron de alguna forma i preguntas, mirando hacia el examen de Elena o al de Hansel y sumando hasta el momento n preguntas correctos, nos falta entonces averiguar de las restantes n-i preguntas cuantas posibilidades tenemos. 
+
+% Demostrar n-k
+Con respecto a la demostracion de las ultimas n-k preguntas, se sabe que Tito puede ver desde la pregunta i hasta la i+k en cada mirada que hace a las hojas de Elena o Hansel, entonces cuando TIto mira a la pregunta i, este puede mirar la i + 1, i+2,...i+k, para el momento en que i = n-k, entonces Tito puede ver las preguntas n-k + 1, n-k+2,...n-k+k = n => TIto pudo ver las ultimas n-k preguntas que tenia respondidas Elena o Hansel mirando una sola vez.
+Si permimos que Tito observe los proximos intervalos de (i=n-k, n-k+k), (n-k+1, n-k+k+1),(n-k+2, n-k+k+2),...,(n-k+n, n-k+k+n) nos damos cuenta de que solo estamos repitiendo respuestas porque en todos los casos el maximo de nuestro intervalo es n y en el primer caso al analizar i=n-k ya obtuvimos todos los valores en ese intervalo.
+
+
+% Fuerza Bruta Optimizada Backtracking con podas - bf_opt
+
+% Idea
+La idea es similar a la que sigue el algoritmo de fuerza bruta sin podas. La diferencia recae en la adicion de un diccionario para conocer en todo momento cuales selecciones ya han sido agregadas y de esta forma no repetir selecciones de una seleccion(SOL) que se encuentre en cierto rango. Si una seleccion ya fue agregada al diccionario, al indexar en la misma de la forma sols_dict[f"{domain}_{start_range}_{stop_range}"] obtendremos el valor de True si ya se esta utilizando en la confeccion de la solucion actual y el valor de False o que no se encuentra la llave en el caso contrario.
+
+Se agrega como comprobacion al inicio lo siguiente k == n or n <= k*p y en caso de cumplirse alguna de las mismas se evalua la solucion que se esta formando actualmente. La idea detras de esto es que para el primer caso, si k==n, se estaria diciendo que si con p=1 puedo ver todas las respuestas en el examen de elena o hansel, pues que intento ver cuales se obtienen y no tengo que revisar solamente cuando p se haga 0.
+En el caso de n <= k*p, se esta diciendo que si tenemos suficientes oportunidades de ver todas las preguntas(n, seleccionandolas una por una) con las k*p selecciones. Pues deberiamos de analizar esta solucion, ya que probablemente se encuentre entre las mejores selecciones de una solucion que podemos conformar.
+
+% Correctitud
+Debido a que este algoritmo es similar al de backtrack nos centraremos en las partes que fueron agregadas. Se puede asumir que las explicaciones restantes serian una copia de las explicaciones que se usaron para demostrar el backtrack sin podas.
+Primeramente comencemos por demostrar que al agregar el nuevo diccionario las soluciones dejan de repetir ciertas elecciones que no nos aportaran mucho y solamente haran nuestro algoritmo aun mas costoso.
+Para ello nos centraremos en las lineas donde se agrega al diccionario la nueva llave con la eleccion tomada en este instante antes de llamar recursivamente, tambien luego de salir del metodo recursivo, al modificar el valor en la llave que contiene a esta eleccion, poniendolo en False.
+Al comienzo del doble ciclo for se esta verificando que la nueva eleccion no se haya tomado anteriormente, para ello se verifica su existencia en el diccionario sols_dict. 
+Podemos decir que 
+
+% Divide y Venceras - div_n_con
+
+% Idea
+La idea a seguir es darnos cuenta de que tenemos 3 
+\end{document}

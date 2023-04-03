@@ -1,0 +1,37 @@
+\documentclass[a4paper, 12pt]{article}
+\topmargin = -1 cm
+\textheight = 650 pt
+%\textwidth = 16 cm
+%\oddsidemargin = -0.1 cm
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{shortvrb}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{listings} 
+
+\begin{document}
+\begin{center}
+\Huge Propuesta de tema para el proyecto de Simulaci\'on
+\end{center}
+
+\begin{itemize}
+\item Carlos Carret C-312
+\end{itemize}
+
+La demostracion del teorema maestra constara de dos partes. La primera parte analiza la recurrencia maestra:
+%poner recurrencia
+bajo la asuncion de que T(n) esta definido solamente en potencias exactas de b, para b >1. Es decir, para n=1, b, b al cuadrado, ... Esta parte brinda toda la intuicion necesaria para entender porque el teorema maestro es verdadero. La segunda parte muestra como extender el analisis a todos los enteros positivos n; esta aplica tecnicas matematicas al problema de manejar parte entera inferior o entero por defecto(el entero mas cercano a un numero que es menor o igual) y parte entera superior o entero por exceso(el entero mas cercano que es igual o mayor).\\
+En esta seccion, a veces abusaremos ligeramente de nuestra notacion asintotica al usarlo para describir el comportamiento de funciones que se definen solo sobre potencias de b. Recalcar que las definiciones de notaciones asintoticas requieren que se demuestren los limites para todos los numeros suficientemente grandes, no solo para aquellos que son potencias de b. Dado que podemos hacer nuevas notaciones asintoticas que se aplican solamente al conjunto {b a la i : i = 0, 1, 2, ...}, en lugar de a los números no negativos, este abuso es menor.\\
+Sin embargo, siempre debemos estar en guardia cuando usamos notación asintótica sobre un dominio limitado para que no saquemos conclusiones incorrectas. Por ejemplo, demostrando que T(n) = O(n) cuando n es una raiz exacta de 2 no nos garantiza que T(n) = O(n). La funcion T(n) podria ser definida como:
+%pag 119 1ra def
+
+en cuyo caso el mejor límite superior que se aplica a todos los valores de n es T(n) = O(n al cuadrado). 
+Debido a este tipo de consecuencia drástica, nunca usaremos la notación asintótica sobre un dominio limitado sin dejar absolutamente claro por el contexto que lo están haciendo
+
+%4.6.1 The proof of exact powers
+1.1 Demostracion para las potencias exactas
+
+
+\end{document}

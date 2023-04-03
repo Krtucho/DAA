@@ -1,0 +1,27 @@
+Error with params:
+elena: [2, 3, 4, 6, 9] hansel: [1, 3, 4, 5, 8, 10] k: 6 p: 2 n: 10 ans: 6
+Error with params:
+elena: [2, 3, 4, 5, 7] hansel: [1, 2, 4, 5, 7] k: 2 p: 2 n: 7 ans: 3
+ with algorithm: greedyError with params:
+elena: [2, 3, 4, 5, 7] hansel: [1, 2, 4, 5, 7] k: 2 p: 2 n: 7 ans: 0
+ with algorithm: greedyError with params:
+elena: [1, 4, 6, 7, 9] hansel: [1, 5, 7, 8] k: 9 p: 9 n: 9 ans: 0
+ with algorithm: greedyError with params:Error with params:
+elena: [1, 2, 3, 5, 8, 10] hansel: [1, 4, 5, 6, 7, 8, 9, 10] k: 9 p: 7 n: 10 ans: 10
+ with algorithm: greedyError with params:
+elena: [1] hansel: [1] k: 1 p: 1 n: 1 ans: 0
+ with algorithm: div_n_conError with params:
+elena: [1, 3, 4, 5, 8, 9] hansel: [2, 3, 4, 8, 9] k: 9 p: 8 n: 9 ans: 6
+ with algorithm: div_n_conError with params:
+elena: [1, 3, 4, 5, 8, 9] hansel: [2, 3, 4, 8, 9] k: 9 p: 8 n: 9 ans: 6
+ with algorithm: div_n_conError with params:
+elena: [1, 3, 4, 5, 8, 9] hansel: [2, 3, 4, 8, 9] k: 9 p: 8 n: 9 ans: 6
+ with algorithm: div_n_conError with params:
+elena: [3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20] hansel: [1, 2, 3, 5, 6, 7, 9, 11, 12, 15, 17, 18, 20] k: 8 p: 2 n: 20 ans: 13 test_solutions/1680479360.0636613_params.json
+ with algorithm: greedyError with params:
+elena: [3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20] hansel: [1, 2, 3, 5, 6, 7, 9, 11, 12, 15, 17, 18, 20] k: 8 p: 2 n: 20 ans: 13
+ with algorithm: div_n_conError with params:
+elena: [3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20] hansel: [1, 2, 3, 5, 6, 7, 9, 11, 12, 15, 17, 18, 20] k: 8 p: 2 n: 20 ans: 13
+ with algorithm: div_n_conError with params:
+elena: [1, 3, 4, 7, 10, 11] hansel: [2, 4, 5, 6, 8, 9, 10, 11] k: 2 p: 7 n: 11 ans: 10  test_solutions/1680542408.1400394_params.json
+ with algorithm: div_n_con
