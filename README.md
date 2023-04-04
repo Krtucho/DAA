@@ -137,7 +137,7 @@ Evaluar la solución conformada será $O(n*k)$ a lo sumo, donde $k < n$ para val
 3T(n-1) + O(n)
 
 Por el Teorema maestro, tenemos:
-$a = 3, b = 1$ => $T(n) = a elevado_a n/1 + n = O(3 elevado_a n + n)$
+$a = 3, b = 1$ => $T(n) = a^{n/1} + n = O(3^{n} + n)$
 
 #### Solucion greedy(golosa) - greedy
 
