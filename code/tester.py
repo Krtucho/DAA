@@ -2,7 +2,6 @@ import bf
 import bf_opt
 import greedy
 import div_n_con
-import dp
 
 from generator import *
 from formats import *
