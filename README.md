@@ -77,7 +77,7 @@ Si permitimos que Tito observe los próximos intervalos de $(i=n-k, n-k+k), (n-k
 
 ##### Complejidad Temporal
 Como podemos ver estamos buscando todas las posibles variaciones con repetición en un arreglo de tamaño $n$, teniendo como dominio un conjunto con 2 posibles valores para ubicar en cada posición del arreglo. Luego nos queda que tendrá una complejidad de:
-$T(n) = 2 a la n + O(n*k)$
+$T(n) = 2^{n} + O(n*k)$
 
 #### Fuerza Bruta Optimizada (Backtracking con podas) - bf_opt
 
@@ -167,7 +167,7 @@ Posteriormente analizamos el bucle que itera $p$ veces:
 * Por último, una vez que salgamos de la condicional $if$ tendremos otra llamada al metodo $update_matched_number()$ el cual ya analizamos anteriormente.
 Finalmente podemos calcular que nuestro algoritmo tendrá una complejidad de:
 $O(n) + O(p*k*n) = O(p*n)$, siendo $k$ menor que n, y teniendo en cuenta que $O(k*n) <= O(n)$ para un $n$ muy grande, tomando a $k$ como constante.
-Si $p=n$ entonces con escribir unas lineas de código que analicen este caso bastara para evitar que nuestra solucion tenga complejidad $n alcuadrado$.
+Si $p=n$ entonces con escribir unas lineas de código que analicen este caso bastara para evitar que nuestra solucion tenga complejidad $n^{2}$.
 
 #### Algoritmo de Programación Dinámica
 Este no llegó a impolementarse, pero mientras se analizaba el problema se pudo notar que era posible implementar un algoritmo de este tipo apoyándonos en una matriz para guardar los valores, primero obteniendo los mejores para cualquier intervalo con p=1, luego con p=2 y seguirnos apoyando en los menores p para obtener p mayores, guardando todos estos valores en la matriz.
