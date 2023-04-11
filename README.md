@@ -2,7 +2,7 @@
 # Primer Proyecto de Diseño y Análisis de Algoritmos
 
 
-## Carlos Carret Miranda C-312
+## Carlos Carret Miranda C-412
 
 <!-- ###Enunciado del problema -->
 
