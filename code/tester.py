@@ -32,6 +32,7 @@ def test_sol(elena, hansel, k, p, n, sol, method="bf", test_alg_time=""):
         return False
 
     return True
+    
 def test_ramdom_sol():
     elena, hansel, k, p, n = problem_generator()#load_params("test_solutions/1680473961.5395467_params.json")#problem_generator()#load_params("test_solutions/1680471934.3560534_params.json")#load_params("test_solutions/1680471130.264099_params.json")#load_params("test_solutions/1680470753.1520169_params.json")#load_params("test_solutions/1680465226.0782478_params.json")#problem_generator()#load_params("1680185784.9080827_params.json")
     
