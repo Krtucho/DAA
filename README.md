@@ -156,9 +156,6 @@ Debido a que probablemente $m\geq n$
 Por el Teorema maestro, tenemos:
 $a = 2, b = 1$ => $T(m) = a^{m/1} + m = O(2^{m} + m)$
 
-Como podemos ver estamos buscando todas las posibles variaciones con repetición en un arreglo de tamaño $n$, teniendo como dominio un conjunto con 2 posibles valores para ubicar en cada posición del arreglo. Luego nos queda que tendrá una complejidad de:
-$T(n) = 2^{n} + O(n*k)$
-
 ```python
 def bf(n_u: int, n_v: int, edges: list, mask: list, index: int, minimums: dict, min_degree)-> None:
     # If ends
@@ -189,40 +186,69 @@ Luego de tener nuestro grafo conformado procedemos a buscar el grado minimo en e
 
 Para la creacion de nuestro algoritmo creamos una clase Graph y una clase Edge, ambos en el archivo $graph.py$. La clase Graph representara a un grafo bipartito.
 Al principio en el diccionario u_djacency_list de la clase Graph se iran insertando las aristas dirigidas desde los nodos de U hacia los de V, pero a su vez tambien se insertaran las aristas en sentido contrario desde V hasta U, para que estas funcionen como aristas de la red residual luego al ejecutar el algoritmo de flujo maximo.
+
 #### Correctitud
+Para la demostracion de nuestro algoritmo debemos de demostrar el porque este nos proporciona una respuesta valida. Para ello nos enfocaremos en porque son esas aristas no saturadas las que forman la respuesta correcta.
+
+Debido a que a cada arista le estamos dando 
 
 #### Complejidad Temporal
-Debido a que el flujo maximo en la red es a lo sumo m y no se haran mas de m busquedas que no aumenten el flujo, nuestra solucion tendra una complejidad temporal de $O((n+m)^{2})$
+Primeramente iteramos por cada vertice $O(n_u+n_v)$. Luego por cada arista y puede que en esos momentos recorramos cada vertice o arista para ver si ya se encuentra, luego $O((n_u+n_v) * m)$. Luego hacemos varios recorridos por los vertices y las aristas, es decir, nada muy grande comparado con el costo calculado hasta el momento. Luego llegamos al ciclo while desde k=minDegree hasta 0, en este ciclo, el bfs costara a lo sumo $O(V+E)$ y por ultimo tenemos que debido a que el flujo maximo en la red es a lo sumo m y no se haran mas de m busquedas que no aumenten el flujo, nuestra solucion tendra una complejidad temporal de $O((n+m)^{2})$, lo cual es mayor que lo calculado hasta el momento.
 
 ```python
-def bf_opt(domains, n, k, p, sol, e, h, sols_dict):
-    ans = 0
-    if k == n or n <= k*p: # Si la cantidad de intentos que puedo usar me basta para encontrar las 9 preguntas entre ambas pruebas
-        if not sol:
-            pass
+def solve(n_u, n_v, edges: list):
+    edges = [(u-1, v-1+n_u) for (u, v) in edges]
+
+    s = -1  # Source
+    t = n_u + n_v  # Sink
+
+    g = Graph(n_u, n_v, dict(), dict(), s, t)
+
+    # Building graph edges
+    for index, (u, v) in enumerate(edges):
+        # u,v = edge
+        if g.has_undirected_edge(u, v):
+            # Debido a que la arista se encuentra repetida, se agrega un vertice intermedio entre la arista nueva que se creara, de esta manera si antes se tenia la arista (u,v) ahora se tendran las aristas (u,i) e (i,v), todas con capacidad=1
+            g.add_cross_edge(u, v, (-index)-1, 1)
         else:
-            ans = evaluate(sol, n, e, h)
-    if not p:
-        return evaluate(sol, n, e ,h)
+            g.add_edge(u, v, index, 1)
 
-    # ans = 0
-    for domain in domains:
-        for i in range(0, n-k+1): # for i in range(0, n-k+1): 
-            if contains_sol(sols_dict, domain, i, i+k): # If has choosen the sol, just continue
-                continue
-            tmp_sol = make_sol(domain, i, i+k)
-            concat_sol:list = SOL.concat_sol(sol, tmp_sol)
+    # Hallando min_degree
+    min_degree = 1e8
+    for adjacency_list in g.u_adjacency_list.values():
+        # has_cross_edges = [True for edge in adjacency_list if edge.u < 0]
+        min_degree = min(min_degree, len(adjacency_list))
 
-            # Logs
-            # printb(tmp_sol)
-            sols_dict[f"{domain}_{i}_{i+k}"] = True
+    k = min_degree
+    # Agregando aristas desde s hasta los nodos de U y desde los nodos de V hasta t
+    for u in g.u_vertex:  # Agregando para s
+        if not g.u_adjacency_list.__contains__(u):
+            return {0: 0}
+        g.add_edge(s, u, s, len(g.u_adjacency_list[u]) - k)
 
-            ans = max(ans, bf_opt(domains, n, k, p-1, concat_sol, e, h, sols_dict))
+    for v in g.v_vertex:  # Agregando para t
+        if not g.u_adjacency_list.__contains__(v):
+            return {0: 0}
+        # Las aristas desde v-> u serian las aristas de retroceso que tendria la red residual
+        g.add_edge(v, t, t, len(g.u_adjacency_list[v]) - k)
 
-            sols_dict[f"{domain}_{i}_{i+k}"] = False
+    # Loop para iterar desde 0 hasta k
+    ans = dict()
+    list_ans = []
+    while k > 0:
+        max_flow(s, t, g)
+        sol_edges = get_unsaturated_edges(n_u, n_v, g)
 
-            # Remover el ultimo elemento de una lista
-            concat_sol.pop()
+        print(sol_edges)
+        augment_flow(1, g)
 
+        # Updating answer
+        ans[k] = len(sol_edges)
+        list_ans.append((k, sol_edges))
+
+        k -= 1
+
+    ans[0] = 0
+    show_answer(list_ans)
     return ans
 ```
