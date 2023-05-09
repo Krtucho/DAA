@@ -51,13 +51,13 @@ Las clases SOL y AlgSol son utilizadas para representar soluciones, dígase solu
 
 La clase SOL tendría un entero $k$ que sería el grado minimo de todos los vertices que pertenecen a seleccionar las aristas representadas por los indices que esten en $True$ en el arreglo $mask$ al indexar en el arreglo $edges$. La variable $count$ representa la cantidad de aristas necesarias (o seleccionadas en $mask$ como True) para esta solucion.
 
-Para el caso de la clase AlgSol se espera que se pase en la variable minimums un diccionario con cada llave siendo el varlor de $k$ y cada valor asociado siendo la cantidad de aristas necesarias(minimas) para que el grafo sea $k$-cubierto. La variable edges es opcional y seria una representacion de estas aristas, de forma que el usuario la use a su conveniencia.
+Para el caso de la clase AlgSol se espera que se pase en la variable minimums un diccionario con cada llave siendo el varlor de $k$ y cada valor asociado siendo la cantidad de aristas necesarias(mínimas) para que el grafo sea $k$-cubierto. La variable edges es opcional y sería una representacion de estas aristas, de forma que el usuario la use a su conveniencia.
 
-Tambien contamos con el metodo estatico AlgSol.compare_sol(ans, sol), el cual utilizaremos para comparar 2 soluciones que contengan ambas todos los valores de k, para 0 <= k <= minDegree y sus valores de cantidad de aristas minimas correspondientes.
+También contamos con el método estático AlgSol.compare_sol(ans, sol), el cual utilizaremos para comparar 2 soluciones que contengan ambas todos los valores de $k$, para $0 \leq k \leq minDegree$ y sus valores de cantidad de aristas minimas correspondientes.
 
 En lo adelante nos referiremos a una solución como una concatenación de selecciones(SOL) o un diccionario donde este contiene las soluciones desde $k = 0$ hasta $k = minDegree$.
 
-Tambien, a lo largo del texto nos referiremos a minDegree como el valor de grado minimo que pueden tener los vertices de nuestro grafo.
+También, a lo largo del texto nos referiremos a minDegree como el valor de grado mínimo que pueden tener los vértices de nuestro grafo.
 
 ```python
 class SOL:
@@ -177,24 +177,26 @@ def bf(n_u: int, n_v: int, edges: list, mask: list, index: int, minimums: dict, 
 #### Idea
 Luego de resolver el problema medianta recursividad y fuerza bruta, se pudo notar que este problema era parecido a resolver otros problemas, como por ejemplo, problemas relacionados con grafos bipartitos y flujos. Entonces se procede a buscar como darle solucion utilizando flujos, ya que se sabe que una vez que se obtenga una solucion utilizando por ejemplo, flujo maximo, tendremos un arma poderosa, la cual como dimos en clases sabremos que nos devuelve una solucion correcta.
 
-Primeramente se procede armando un nuevo grafo de la siguiente manera: conectamos la fuente a cada vertice de la parte izquierda(vertices pertenecientes a U) con arista con capacidad deg_u - k(donde deg_u es el grado del vertice), luego transformamos cada arista del grafo original en una arista dirigida con capacidad 1. Despues conectamos cada vertice de la parte derecha(vertices pertenecientes a
-Luego de tener nuestro grafo conformado procedemos a buscar el grado minimo en el mismo, es decir minDegree, hacemos a $k = min(0, minDegree)$ e iteramos k veces(donde $0 \leq k leq minDegree$) repitiendo el siguiente procedimiento: Hallamos el flujo maximo utilizando bfs. Nos quedamos con las aristas que no hayan sido saturadas. 
+Primeramente se procede armando un nuevo grafo de la siguiente manera: conectamos la fuente a cada vértice de la parte izquierda(vértices pertenecientes a U) con arista con capacidad deg_u - k(donde deg_u es el grado del vértice), luego transformamos cada arista del grafo original en una arista dirigida con capacidad 1. Despues conectamos cada vertice de la parte derecha(vértices pertenecientes a
+Luego de tener nuestro grafo conformado procedemos a buscar el grado minimo en el mismo, es decir minDegree, hacemos a $k = min(0, minDegree)$ e iteramos k veces(donde $0 \leq k \leq minDegree$) repitiendo el siguiente procedimiento: 
+- Hallamos el flujo maximo utilizando bfs. 
+- Nos quedamos con las aristas que no hayan sido saturadas. 
 - Aumentamos en 1 el flujo de las aristas que se tenia en la iteracion anterior.
 - Extraemos las aristas que no esten saturadas y estas seran las aristas que pertenezcan a nuestra solucion para este valor de k.
 - Por ultimo decrementamos a k en 1.
-- Cuando el valor de k sea menor o igual a 0 se detiene la ejecucion del ciclo while.
+- Cuando el valor de $k$ sea menor o igual a 0 se detiene la ejecucion del ciclo while.
 
-Para la creacion de nuestro algoritmo creamos una clase Graph y una clase Edge, ambos en el archivo $graph.py$. La clase Graph representara a un grafo bipartito.
-Al principio en el diccionario u_djacency_list de la clase Graph se iran insertando las aristas dirigidas desde los nodos de U hacia los de V, pero a su vez tambien se insertaran las aristas en sentido contrario desde V hasta U, para que estas funcionen como aristas de la red residual luego al ejecutar el algoritmo de flujo maximo.
+Para la creacion de nuestro algoritmo creamos una clase $Graph$ y una clase $Edge$, ambos en el archivo $graph.py$. La clase $Graph$ representara a un grafo bipartito.
+Al principio en el diccionario u_djacency_list de la clase $Graph$ se iran insertando las aristas dirigidas desde los nodos de $U$ hacia los de $V$, pero a su vez también se insertarán las aristas en sentido contrario desde $V$ hasta $U$, para que estas funcionen como aristas de la red residual luego al ejecutar el algoritmo de flujo máximo.
 
 #### Correctitud
-Para la demostracion de nuestro algoritmo debemos de demostrar el porque este nos proporciona una respuesta valida. Para ello nos enfocaremos en porque son esas aristas no saturadas las que forman la respuesta correcta.
+Para la demostracion de nuestro algoritmo debemos de demostrar el porque este nos proporciona una respuesta válida. Para ello nos enfocaremos en porque son esas aristas no saturadas las que forman la respuesta correcta.
 
-Debido a que a cada arista desde s hasta $u \in U$ y desde t hasta $v \in V$ le estamos dando $degre = deg_u - k$, con esto estamos diciendo que al intentar mandar flujo, se saturaran aquellas aristas que influyen en que estos vertices $u's$ y $v's$ tengan grado $deg_u-k$, pero como tal a nosotros nos interesa que tengan al menos grado $k$, luego en ese instante nos quedarian $m_{uf} = m_u - (deg_u - k)$ de las $m_u$ aristas que se conectaban con el vertice $u$. Como k va desde minDegree hasta 0, para valores mayores de k tendremos menor cantidad de aristas saturadas y para menores valores de k, el caso contrario. Lo que si debemos de darnos cuenta es que con esa cantidad de aristas que quedaron siendo $m_{uf}$ se puede lograr mantener todos los vertices con al menos el mismo degree, ya que nos quedamos en un comienzo con k como el minDegree o 0, es decir, en todo momento los vertices tendran valor mayor o igual a $k \leq minDegree$, incluso luego de quitarles las $(deg_u) - k$
+Debido a que a cada arista desde $s$ hasta $u \in U$ y desde $t$ hasta $v \in V$ le estamos dando $degre = deg_u - k$, con esto estamos diciendo que al intentar mandar flujo, se saturarán aquellas aristas que influyen en que estos vertices $u's$ y $v's$ tengan grado $deg_u-k$, pero como tal a nosotros nos interesa que tengan al menos grado $k$, luego en ese instante nos quedarian $m_{uf} = m_u - (deg_u - k)$ de las $m_u$ aristas que se conectaban con el vértice $u$. Como $k$ va desde minDegree hasta 0, para valores mayores de $k$ tendremos menor cantidad de aristas saturadas y para menores valores de $k$, el caso contrario. Lo que si debemos de darnos cuenta es que con esa cantidad de aristas que quedaron siendo $m_{uf}$ se puede lograr mantener todos los vértices con al menos el mismo degree, ya que nos quedamos en un comienzo con $k$ como el minDegree o 0, es decir, en todo momento los vértices tendrán valor mayor o igual a $k \leq minDegree$, incluso luego de quitarles las $(deg_u) - k$
 aristas.
 
 #### Complejidad Temporal
-Primeramente iteramos por cada vertice $O(n_u+n_v)$. Luego por cada arista y puede que en esos momentos recorramos cada vertice o arista para ver si ya se encuentra, luego $O((n_u+n_v) * m)$. Luego hacemos varios recorridos por los vertices y las aristas, es decir, nada muy grande comparado con el costo calculado hasta el momento. Luego llegamos al ciclo while desde k=minDegree hasta 0, en este ciclo, el bfs costara a lo sumo $O(V+E)$ y por ultimo tenemos que debido a que el flujo maximo en la red es a lo sumo m y no se haran mas de m busquedas que no aumenten el flujo, nuestra solucion tendra una complejidad temporal de $O((n+m)^{2})$, lo cual es mayor que lo calculado hasta el momento.
+Primeramente iteramos por cada vertice $O(n_u+n_v)$. Luego, iteramos por cada arista y puede que en esos momentos recorramos cada vértice o arista para ver si ya se encuentra, luego $O((n_u+n_v) * m)$. Luego hacemos varios recorridos por los vertices y las aristas, es decir, nada muy grande comparado con el costo calculado hasta el momento. Luego llegamos al ciclo while desde k=minDegree hasta 0, en este ciclo, el bfs costara a lo sumo $O(V+E)$ y por último tenemos que debido a que el flujo máximo en la red es a lo sumo m y no se realizarán más de m búsquedas que no aumenten el flujo, nuestra solución tendrá una complejidad temporal de $O((n+m)^{2})$, lo cual es mayor que lo calculado hasta el momento.
 
 ```python
 def solve(n_u, n_v, edges: list):

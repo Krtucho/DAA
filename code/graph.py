@@ -50,8 +50,7 @@ class Graph:
         if index == -2 and capacity==-1:
             return
         try:
-            # if self.u_adjacency_list[u].contains(v):
-            edge: Edge = self.get_edge(u, v)#self.u_adjacency_list[u].get(v)
+            edge: Edge = self.get_edge(u, v)
             if capacity != -1:
                 edge.capacity += capacity
             if index != -2:
