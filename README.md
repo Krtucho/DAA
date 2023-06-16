@@ -246,6 +246,8 @@ Fin Si
 
 Este pseudocódigo comienza verificando si los valores de b_i son coprimos entre sí. Si lo son, entonces calcula el valor de M mediante la multiplicación de todos los valores de b_i. Luego, comienza a probar valores enteros positivos para x, comenzando por Max(b_i) + 1, y verifica si cada valor de x cumple la condición dada. Si se encuentra un valor de x que cumple la condición, se imprime y se detiene el proceso. De lo contrario, se continúa probando valores de x hasta encontrar una solución.
 
+En cuanto a la correctitud de nuestro algoritmo de fuerza bruta podemos decir que encontrara la solucion correcta en caso de existir, ya que explora todas las posibles combinaciones para todos los pares (a_i, b_i) con cualquier valor de x.
+
 #### Sin utilizar TCR
 Se presenta otra solucion sin utilizar el teorema chino del resto:
 
