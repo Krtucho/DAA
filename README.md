@@ -1,5 +1,5 @@
 
-# Segundo Proyecto de Diseño y Análisis de Algoritmos
+# Tercer Proyecto de Diseño y Análisis de Algoritmos
 
 
 ## Carlos Carret Miranda C-412
