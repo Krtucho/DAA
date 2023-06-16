@@ -134,7 +134,7 @@ Luego de haber analizado por un tiempo considerable nuestro problema, se pudo no
 
 Dada una fórmula 3-SAT $\phi$ con $n$ variables y $m$ cláusulas, construimos un sistema de in-congruencias $I$ de la siguiente manera:
 
-1. Representamos cada variable en $\phi$ como un número primo distinto. Por ejemplo, si $x_i$ es una variable, la representamos con el $i$-ésimo número primo $p_i$.
+1. Representamos cada variable en $\phi$ como un número primo distinto. Por ejemplo, si $x_i$ es una variable, la representamos con el $i$-ésimo número primo $p_i$. Para ello tendremos que encontrar $n$ enteros relativamente primos $p_{1},...,p_{n} \geq 2$ de tamaño polinómico (por ejemplo, los primeros $n$ primos).
 
 2. Para cada cláusula $C_j$ en $\phi$, creamos una in-congruencia de la forma:
 
